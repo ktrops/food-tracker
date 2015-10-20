@@ -1,0 +1,4 @@
+id,name,phone,email,password,password_confirmation
+1,Katie,206-456-7865,katie@mail.com,password,password
+2,Frank,206-543-7654,frank@mail.com,password,password
+3,Ada,206-456-1234,ada@mail.com,password,password
