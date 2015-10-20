@@ -5,12 +5,24 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      sessions[:user_id] = user.user_id
-      redirect_to root_url, notice: "Logged In!"
+      session[:user_id] = user.id
+      redirect_to user_food_path(user.id), notice: "Logged In!"
     else
       flash.now.alert = "INvalid email or password"
       render "new"
     end
+  end
+
+  def oauth
+    # binding.pry
+    auth = request.env["omniauth.auth"]
+    user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth)
+    session[:user_id] = user.id
+    redirect_to user_path, notice: "Signed In!"
+  end
+
+  def failure
+    redirect_to root_url, alert: "Authentication failed, please try again."
   end
 
   def destory
