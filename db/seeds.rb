@@ -2,9 +2,15 @@ require 'httparty'
 
 products_uri = "http://localhost:3000/product/all"
 categories_uri = "http://localhost:3000/category/all"
+fridge_uri = "http://localhost:3000/fridge"
+freezer_uri = "http://localhost:3000/freezer"
+pantry_uri = "http://localhost:3000/pantry"
 
 items = HTTParty.get(products_uri)
 categories = HTTParty.get(categories_uri)
+fridge = HTTParty.get(fridge_uri)
+freezer = HTTParty.get(freezer_uri)
+pantry = HTTParty.get(pantry_uri)
 
 categories.each do |cat|
  Category.create(
@@ -14,7 +20,11 @@ categories.each do |cat|
 end
 
 
+
 items.each do |item|
+  pantry_store = pantry.include?(item) ? true : false
+  fridge_store = fridge.include?(item) ? true : false
+  freezer_store = freezer.include?(item) ? true : false
   Product.create(
        category_id: item['category_id'],
        category_name: item['category'],
@@ -37,7 +47,42 @@ items.each do |item|
        freezer_dop_min: item['freezer_dop_min'],
        freezer_dop_max: item['freezer_dop_max'],
        freezer_dop_metric: item['freezer_dop_metric'],
-       freezer_tips: item['freezer_tips']
+       freezer_tips: item['freezer_tips'],
+       fridge: fridge_store,
+       freezer: freezer_store,
+       pantry: pantry_store
 
     )
 end
+
+CSV.foreach('db/users.csv', headers: true) do |row|
+  User.create(
+    name: row["name"],
+    phone: row["phone"],
+    email: row["email"],
+    password: row["password"],
+    password_confirmation: row["password_digest"]
+    )
+end
+
+CSV.foreach('db/user_products.csv', headers: true) do |row|
+  user = User.find(row["user_id"])
+  user.products << Product.find(row["product_id"])
+  user_products = user.user_products
+  # print(user_products)
+  user_products.each do |user_product|
+    product = Product.find(user_product.product_id)
+    print("im the product " + product.id.to_s)
+    if product.pantry == true
+      user_product.location = "pantry"
+    elsif product.fridge == true
+      user_product.location = "fridge"
+    else
+      user_product.location = "freezer"
+    end
+    print("I'm the user product location " + user_product.location)
+    # UserProduct.save
+  end
+  # user.products.location =
+end
+
