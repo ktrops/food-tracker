@@ -1,0 +1,7 @@
+<h1> Enter your items</h1>
+
+<%= form_for @product do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Import product" %>
+<% end %>

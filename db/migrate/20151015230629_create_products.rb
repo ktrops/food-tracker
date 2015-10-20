@@ -24,6 +24,9 @@ class CreateProducts < ActiveRecord::Migration
       t.string :freezer_dop_metric
       t.string :freezer_tips
       t.boolean :user_data, default: false
+      t.boolean :fridge, default: false
+      t.boolean :pantry, default: false
+      t.boolean :freezer, default: false
 
       t.timestamps null: false
     end

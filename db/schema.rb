@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015231453) do
+ActiveRecord::Schema.define(version: 20151019223313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,22 +47,37 @@ ActiveRecord::Schema.define(version: 20151015231453) do
     t.string   "freezer_dop_metric"
     t.string   "freezer_tips"
     t.boolean  "user_data",                   default: false
+    t.boolean  "fridge",                      default: false
+    t.boolean  "pantry",                      default: false
+    t.boolean  "freezer",                     default: false
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
-  create_table "products_users", id: false, force: :cascade do |t|
-    t.integer "user_id",    null: false
-    t.integer "product_id", null: false
+  create_table "user_products", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.string   "location"
+    t.datetime "dop_expiration_date_min"
+    t.datetime "dop_expiration_date_max"
+    t.datetime "thawed_expiration_date_min"
+    t.datetime "thawed_expiration_date_max"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
+
+  add_index "user_products", ["product_id"], name: "index_user_products_on_product_id", using: :btree
+  add_index "user_products", ["user_id"], name: "index_user_products_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "phone"
     t.string   "email"
     t.string   "password_digest"
+    t.string   "provider"
+    t.string   "uid"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

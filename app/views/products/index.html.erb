@@ -1,0 +1,23 @@
+<h1>Freezer items</h1>
+<% @freezer.each do |item| %>
+  <%= item.name %>
+<% end %>
+
+<h1>Pantry items</h1>
+<% @pantry.each do |item| %>
+  <% cat = Category.find(item[0].category_id) %>
+  <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
+  <%= cat.category + subcat + ":" %>
+  <%= item[0].name + "," %>
+  <% if item[0].pantry_dop_min == 0 %>
+    <%= item[0].pantry_tips %><br>
+  <% else %>
+    <%= item[1].dop_expiration_date_min %><br>
+  <% end %>
+
+<% end %>
+
+<h1>Fridge items</h1>
+<% @fridge.each do |item| %>
+  <%= item.name %>
+<% end %>

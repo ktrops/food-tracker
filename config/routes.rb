@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'sign_up' => 'users#new', as: :sign_up
+  get '/sign_up' => 'users#new', as: :sign_up
+
+  get '/user' => 'users#index', as: :user
 
   # get 'users/new'
 
@@ -9,7 +11,20 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'users#new'
 
-  get '/sign_in' => 'sessions#create', as: :sessions_path
+  get "/auth/google_oauth2/callback" => 'sessions#oauth', as: :google
+
+  get '/auth/failure' => 'sessions#failure', as: :failure
+
+  get '/sign_in' => 'sessions#new', as: :session
+  post '/sign_in' => 'sessions#create'
+
+  delete '/log_out' => 'sessions#destroy', as: :logout
+
+  get '/user/:user_id/list' => 'products#list', as: :list
+
+  post '/list' => 'products#list'
+
+  get '/user/:user_id/food' => 'products#index', as: :user_food
 
   resources :users
 
