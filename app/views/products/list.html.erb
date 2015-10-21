@@ -1,7 +1,9 @@
 <h1> Enter your items</h1>
 
-<%= form_for @product do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit "Import product" %>
+<%= form_for @product, url: list_path, html: { id: "listForm" } do %>
+  <label for="product_name">Name</label>
+  <input type="text" name="products[][name]" id="product_name">
+  <label for="product_name">Name</label>
+  <input type="text" name="products[][name]" id="product_name">
+  <input type="submit" name="commit" value="Import product">
 <% end %>
