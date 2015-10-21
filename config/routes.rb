@@ -22,9 +22,10 @@ Rails.application.routes.draw do
 
   get '/user/:user_id/list' => 'products#list', as: :list
 
-  post '/list' => 'products#list'
+  post '/user/:user_id/list' => 'products#create'
 
   get '/user/:user_id/food' => 'products#index', as: :user_food
+
 
   resources :users
 
