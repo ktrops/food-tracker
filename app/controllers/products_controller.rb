@@ -5,12 +5,22 @@ class ProductsController < ApplicationController
 
   def create
     user = User.find(session[:user_id])
-    @product = Product.new(product_params)
-    if @product.save
-      user.products << @product
-      redirect_to index_path
+    raise
+    @product1 = Product.find_by_name_or_subname(params[:product][:name])
+    # if @product1.length > 1 put a popup here so users can choose if the search returns multipule products.
+    raise
+    if @product1
+      user.products << @product1
+      @product1
+      redirect_to user_food_path
     else
-      render :list
+      @product2 = Product.new(product_params)
+      if @product2.save
+        user.products << @product2
+        redirect_to user_food_path
+      else
+        render :list
+      end
     end
   end
 
@@ -26,9 +36,7 @@ class ProductsController < ApplicationController
       # print("im the product " + product.id.to_s)
       if product.pantry == true
         user_product.location = "pantry"
-        user_product.dop_expiration_date_min = date + product.pantry_dop_min
-        print("HEY, I'm the Product" + product.pantry_dop_min.to_s)
-        print("HEY, I'm the Userproduct" + user_product.dop_expiration_date_min.to_s)
+        user_product.dop_expiration_date_min = expiration_date_min(product, "pantry")
         @pantry.push([user_product.product, user_product])
 
       elsif product.fridge == true

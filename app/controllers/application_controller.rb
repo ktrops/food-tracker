@@ -4,6 +4,32 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   skip_before_filter :verify_authenticity_token unless Rails.env.prodution?
 
+    def expiration_date_min(product, storage)
+    date = Time.now
+    if dynamic_dop_min(product, storage, "metric") == "Months"
+      expiration_date =  date + dynamic_dop_min(product, storage, "dop").month
+    elsif dynamic_dop_min(product, storage, "metric") == "Years"
+      expiration_date =  date + dynamic_dop_min(product, storage, "dop").year
+    elsif dynamic_dop_min(product, storage, "metric") == "Days"
+      expiration_date =  date + dynamic_dop_min(product, storage, "dop")
+    else
+      expiration_date = 0
+    end
+    expiration_date
+
+  end
+
+  def dynamic_dop_min(product, storage, type)
+    if type == "dop"
+      variable = storage + "_dop_min"
+      product.send(variable.to_sym)
+    elsif type == "metric"
+      variable = storage + "_dop_metric"
+      product.send(variable.to_sym)
+    end
+  end
+
+
   private
 
   def current_user
