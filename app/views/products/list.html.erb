@@ -1,9 +1,12 @@
 <h1> Enter your items</h1>
 
-<%= form_for @product, url: list_path, html: { id: "listForm" } do %>
-  <label for="product_name">Name</label>
-  <input type="text" name="products[][name]" id="product_name">
-  <label for="product_name">Name</label>
-  <input type="text" name="products[][name]" id="product_name">
-  <input type="submit" name="commit" value="Import product">
+<%= form_for @product, url: list_path do %>
+<div id="listForm">
+  <label class="labelItem" for="product_name0">Name</label>
+  <input type="text" name="products[][name]" class="inputItem" id="product_name0">
+  <label class="labelItem" for="product_name1">Name</label>
+  <input type="text" name="products[][name]" class="inputItem" id="product_name1">
+  <input type="button" name="add_another" id="addAnother" value="Add another item">
+  <input type="submit" name="commit" value="Import items">
+</div>
 <% end %>
