@@ -5,21 +5,21 @@ class ProductsController < ApplicationController
 
   def create
     user = User.find(session[:user_id])
-    raise
-    @product1 = Product.find_by_name_or_subname(params[:product][:name])
-    # if @product1.length > 1 put a popup here so users can choose if the search returns multipule products.
-    raise
-    if @product1
-      user.products << @product1
-      @product1
-      redirect_to user_food_path
-    else
-      @product2 = Product.new(product_params)
-      if @product2.save
-        user.products << @product2
+    params[:products].each do |product|
+      @product1 = Product.find_by_name_or_subname(product[:name])
+      # if @product1.length > 1 put a popup here so users can choose if the search returns multipule products.
+      if @product1
+        user.products << @product1
+        @product1
         redirect_to user_food_path
       else
-        render :list
+        @product2 = Product.new(product_params)
+        if @product2.save
+          user.products << @product2
+          redirect_to user_food_path
+        else
+          render :list
+        end
       end
     end
   end
@@ -31,6 +31,7 @@ class ProductsController < ApplicationController
     @pantry = []
     @freezer = []
     @fridge = []
+    #figure out how to do this to only the newest user_products
     user_products.each do |user_product|
       product = Product.find(user_product.product_id)
       # print("im the product " + product.id.to_s)
