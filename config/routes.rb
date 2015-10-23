@@ -26,6 +26,10 @@ Rails.application.routes.draw do
 
   get '/user/:user_id/food' => 'products#index', as: :user_food
 
+  patch '/user/:user_id/food' => 'products#update'
+
+  patch '/user_products/date' => 'products#update_date', as: :update_date
+
 
   resources :users
 

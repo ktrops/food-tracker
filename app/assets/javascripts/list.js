@@ -16,4 +16,49 @@ $(document).ready(function () {
 
   })
 
+
+
+  $(".userProductInput").each(function(){
+    $(this).datepicker({
+        dateFormat:"yy-mm-dd",
+        onSelect: function(dateText, inst) {
+        var id = $(this).attr("id");
+        var value = dateText
+        var payload = {user_product:{id:id, dop_expiration_date_min:value}};
+        console.log(payload);
+        $.ajax({
+          url: '/user_products/date',
+          type: 'PATCH',
+          data: payload,
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+          },
+          complete: function() {
+            console.log("Date updated");
+          }
+        })
+      }
+    })
+  })
+
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

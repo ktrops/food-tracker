@@ -30,6 +30,25 @@ class ApplicationController < ActionController::Base
   end
 
 
+
+  def categorize_product(product, user_product)
+    if product.pantry == true
+      user_product.location = "pantry"
+      user_product.dop_expiration_date_min = expiration_date_min(product, "pantry")
+      return user_product
+
+    elsif product.fridge == true
+      user_product.location = "fridge"
+      user_product.dop_expiration_date_min = expiration_date_min(product, "fridge")
+      return user_product
+    else
+      user_product.location = "freezer"
+      user_product.dop_expiration_date_min = expiration_date_min(product, "freezer")
+      return user_product
+    end
+  end
+
+
   private
 
   def current_user
