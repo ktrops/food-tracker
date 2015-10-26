@@ -1,6 +1,23 @@
 class ProductsController < ApplicationController
   def list
+    user = User.find(session[:user_id])
     @product = Product.new
+    @user_product = user.products
+    user = User.find(session[:user_id])
+    @user_products = user.products
+  end
+
+  def product_check
+    name = params[:products][0][:name]
+    @product = Product.find_by_name_or_subname(name)
+    render :json => @product
+
+  end
+
+  def product_select
+    @user_products = params[:products]
+    binding.pry
+    render :index
   end
 
   def create
@@ -42,7 +59,6 @@ class ProductsController < ApplicationController
     @freezer = []
     @fridge = []
     user_products.each do |user_product|
-      # raise
       product = Product.find(user_product.product_id)
       @user_product = user_product
       if user_product.location == "pantry"

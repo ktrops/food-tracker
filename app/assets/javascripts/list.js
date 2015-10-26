@@ -4,14 +4,17 @@ $(document).ready(function () {
     rowNum++
     var $selectLastInput = $(".inputItem").last();
     var $selectLastLabel = $(".labelItem").last();
+    // var $formControl = $(".form-group").last();
+    // var $lastDiv = $()
     var nextHtmlLabel = $selectLastLabel.clone();
     nextHtmlLabel.attr("for", "product_name" + rowNum);
-    console.log(nextHtmlLabel);
     $($selectLastInput).after(nextHtmlLabel);
 
     var $selectLatestLabel = $(".labelItem").last()
     var nextHtmlInput = $selectLastInput.clone();
     nextHtmlInput.attr("id", "product_name" + rowNum);
+    console.log(nextHtmlInput);
+    nextHtmlInput.val("");
     $($selectLatestLabel).after(nextHtmlInput);
 
   })
@@ -39,6 +42,45 @@ $(document).ready(function () {
         })
       }
     })
+  })
+
+  $("#importItems").click(function(event) {
+    event.preventDefault();
+    // var name = $(this).attr("product")
+    // console.log($(this).attr());
+    // var payload = $(this).parents().serialize()
+
+    $.post({
+      url: '/product_check',
+      data: $(this).parents().serialize(),
+      success: function(produts) {
+        $("aboutModal").modal();
+      }
+    })
+    // var $form = $(this).parents("form");
+    // $.ajax({
+    //   url: '/product_check',
+    //   type: 'POST',
+    //   data: payload,
+    //   success: function(products) {
+    //     // $('#aboutModal').on('show.bs.modal', function(event) {
+    //        $.get('/product_check', function(data) {
+    //        $("#aboutModal").modal(data);
+    //      }
+           // $.ajax({
+           //  url: '/product_select',
+           //  type: 'POST',
+           //  data: {products:products},
+           //  success: function(selected_products) {
+           //    console.log(selected_products)
+           //    }
+           //   })
+            // }
+
+      //   }
+      // }
+    // })
+
   })
 
 })

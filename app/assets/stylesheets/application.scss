@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html body {
+  background: url("avocado.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/*form {
+  background: none;
+}*/
+
+.row {
+  margin: 0 -9999rem;
+  margin-top: 20%;
+  /* add back negative margin value */
+  padding: 0.25rem 9999rem;
+  padding-bottom: 4%;
+  height: 100%;
+  background: rgba(71, 181, 108, 0.5);
+  text-align: center;
+}
+/*  background: #80E680;
+  width: 100%;
+  line-height: 100%;*/
+  /*opacity: 0.4;*/
+
+
+

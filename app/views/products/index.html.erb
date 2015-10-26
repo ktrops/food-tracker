@@ -1,38 +1,98 @@
-<h1>Freezer items</h1>
-<% @freezer.each do |item| %>
-  <% cat = Category.find(item[0].category_id) %>
-  <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
-  <%= cat.category + subcat + ":" %>
-  <%= item[0].name + "," %>
-  <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-  <%= form_for @user_product, url: update_date_path, method: :patch do %>
-    <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
-  <% end %>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 col-md-4 col-md-offset-1">
+      <h1>Fridge items</h1>
+      <table class="table">
+        <tr>
+          <th>Category</th>
+          <th>Item</th>
+          <th>Expiration Date</th>
+        </tr>
+      <% @fridge.each do |item| %>
+        <% cat = Category.find(item[0].category_id) %>
+        <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
+        <tr>
+          <td>
+        <%= cat.category + subcat + ":" %>
+          </td>
+          <td>
+        <%= item[0].name + "," %>
+          </td>
+          <td>
+        <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
+          </td>
+          <td>
+        <%= form_for @user_product, url: update_date_path, method: :patch do %>
+          <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
+        <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+    <div class="col-xs-6 col-md-4 col-md-offset-1">
 
-<h1>Pantry items</h1>
+      <h1>Pantry items</h1>
+      <table class="table">
+        <tr>
+          <th>Cateogry</th>
+          <th>Item</th>
+          <th>Expiration Date</th>
+        </tr>
 
-<% @pantry.each do |item| %>
-  <% cat = Category.find(item[0].category_id) %>
-  <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
-  <%= cat.category + subcat + ":" %>
-  <%= item[0].name + "," %>
-  <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-  <%= form_for @user_product, url: update_date_path, method: :patch do %>
-    <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
-  <% end %>
-<% end %>
+      <% @pantry.each do |item| %>
+        <% cat = Category.find(item[0].category_id) %>
+        <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
+        <tr>
+          <td>
+        <%= cat.category + " " + subcat + ":" %>
+          </td>
+          <td>
+        <%= item[0].name + "," %>
+          </td>
+        <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
+          <td>
+        <%= form_for @user_product, url: update_date_path, method: :patch do %>
+          <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
+        <% end %>
+          </td>
+        </tr>
 
-<h1>Fridge items</h1>
-<% @fridge.each do |item| %>
-  <% cat = Category.find(item[0].category_id) %>
-  <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
-  <%= cat.category + subcat + ":" %>
-  <%= item[0].name + "," %>
-  <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-  <%= form_for @user_product, url: update_date_path, method: :patch do %>
-    <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
-  <% end %>
-<% end %>
+      <% end %>
+    </table>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-xs-6 col-md-4 col-md-offset-4">
+      <h1>Freezer items</h1>
+      <table class="table">
+        <tr>
+          <th>Category</th>
+          <th>Item</th>
+          <th>Expiration Date</th>
+        </tr>
+      <% @freezer.each do |item| %>
+        <% cat = Category.find(item[0].category_id) %>
+        <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
+        <tr>
+          <td>
+        <%= cat.category + subcat + ":" %>
+          </td>
+          <td>
+        <%= item[0].name + "," %>
+          </td>
+          <td>
+        <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
+          <%= form_for @user_product, url: update_date_path, method: :patch do %>
+            <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
+          <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
 
 

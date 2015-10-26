@@ -30,6 +30,11 @@ Rails.application.routes.draw do
 
   patch '/user_products/date' => 'products#update_date', as: :update_date
 
+  post '/product_check' => 'products#product_check', as: :product_check
+  get '/product_check' => 'products#product_check'
+
+  post '/product_select' => 'products#product_select', as: :product_select
+
 
   resources :users
 
