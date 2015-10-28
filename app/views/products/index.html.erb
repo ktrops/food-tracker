@@ -14,16 +14,16 @@
 
           <div class="row draggable" >
 
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-4 col-md-4 category">
               <%= cat.category + subcat + ":" %>
             </div>
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-4 col-md-4 name">
               <%= item[0].name + "," %>
             </div>
-            <div class="col-xs-4 col-md-4">
+
               <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-            </div>
-            <div class="col-xs-4 col-md-4">
+
+            <div class="col-xs-4 col-md-4 date">
               <%= form_for @user_product, url: update_date_path, method: :patch do %>
                 <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
               <% end %>
@@ -58,14 +58,14 @@
         <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
 
           <div class="row draggable">
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-4 col-md-4 category">
               <%= cat.category + " " + subcat + ":" %>
             </div>
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-4 col-md-4 name">
               <%= item[0].name + "," %>
             </div>
               <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-4 col-md-4 date">
               <%= form_for @user_product, url: update_date_path, method: :patch do %>
                 <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
               <% end %>
@@ -104,14 +104,14 @@
           <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
 
           <div class="row draggable">
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-4 col-md-4 category">
               <%= cat.category + subcat + ":" %>
             </div>
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-4 col-md-4 name">
               <%= item[0].name + "," %>
             </div>
-            <div class="col-xs-4 col-md-4">
               <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
+            <div class="col-xs-4 col-md-4 date">
               <%= form_for @user_product, url: update_date_path, method: :patch do %>
                 <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
               <% end %>

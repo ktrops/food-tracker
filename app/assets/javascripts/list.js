@@ -25,7 +25,10 @@ $(document).ready(function () {
 
   $(".draggable").draggable({
       // helper: "clone",
-      revert: "invalid"
+      revert: "invalid",
+      start: function() {
+        var draggedThing = $(this);
+      }
       // start: function(event, ui) {
       //   c.tr = this;
       //   c.helper = ui.helper;
@@ -33,14 +36,34 @@ $(document).ready(function () {
     });
 
   $(".droppable").droppable({
+
     activeClass: "ui-state-default",
     hoverClass: "ui-state-hover",
     drop: function( event, ui) {
       console.log("I've dropped");
+      console.log(event);
+      console.log($(this));
+      console.log(ui);
       var dropPlace = $(this).clone();
       var table = $(this).parents();
       $(table).append(dropPlace);
       $(this).attr("class", "draggable");
+      var table = $(this).parent().attr("id");
+      var id = ui.draggable.children(".date").children("form").children(".userProductInput").attr("id");
+      var location = table.match(/^[^_]+(?=_)/);
+      var payload = {user_product: {id: id, location: location[0]}}
+      $.ajax({
+        url: "user_product/change_location",
+        type: "PATCH",
+        data: payload,
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+        },
+        complete: function() {
+            console.log("Date updated");
+        }
+
+      })
       // var item = ui.draggable.text();
       // $(this).val(item);
 

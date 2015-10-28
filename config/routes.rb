@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   get 'user/:user_id/products/autocomplete_product_name' => 'products#autocomplete_product_name', as: :autocomplete
 
+  patch '/user/:user_id/user_product/change_location' => 'products#change_location', as: :change_location
+
 
   resources :users
 

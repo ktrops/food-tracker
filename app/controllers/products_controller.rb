@@ -17,6 +17,12 @@ class ProductsController < ApplicationController
 
   end
 
+  def change_location
+    user_product = UserProduct.find(params[:user_product][:id])
+    user_product.update(user_product_params)
+    render :text => "Location Changed"
+  end
+
   def product_form
     name = params[:product]
     @product = Product.find_by_name_or_subname(name)
@@ -100,7 +106,7 @@ class ProductsController < ApplicationController
   end
 
   def user_product_params
-    params.require(:user_product).permit(:dop_expiration_date_min, :dop_expiration_date_max)
+    params.require(:user_product).permit(:dop_expiration_date_min, :dop_expiration_date_max, :location)
   end
 
   def product_params
