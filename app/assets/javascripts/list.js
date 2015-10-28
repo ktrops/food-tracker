@@ -2,21 +2,51 @@ $(document).ready(function () {
   var rowNum = 0
   $("#addAnother").click(function( event ) {
     rowNum++
+    var $formControlLast = $(".form-group").last();
+    var $nextFormControl = $formControlLast.clone();
+    $formControlLast.after($nextFormControl);
     var $selectLastInput = $(".inputItem").last();
     var $selectLastLabel = $(".labelItem").last();
-    // var $formControl = $(".form-group").last();
+    $selectLastLabel.attr("for", "product_name" + rowNum);
+    $selectLastInput.attr("id", "product_name" + rowNum);
     // var $lastDiv = $()
-    var nextHtmlLabel = $selectLastLabel.clone();
-    nextHtmlLabel.attr("for", "product_name" + rowNum);
-    $($selectLastInput).after(nextHtmlLabel);
+    // var nextHtmlLabel = $selectLastLabel.clone();
+    // $($selectLastInput).after(nextHtmlLabel);
 
-    var $selectLatestLabel = $(".labelItem").last()
-    var nextHtmlInput = $selectLastInput.clone();
-    nextHtmlInput.attr("id", "product_name" + rowNum);
-    console.log(nextHtmlInput);
-    nextHtmlInput.val("");
-    $($selectLatestLabel).after(nextHtmlInput);
+    // var $selectLatestLabel = $(".labelItem").last()
+    // var nextHtmlInput = $selectLastInput.clone();
+    // console.log(nextHtmlInput);
+    $selectLastInput.val("");
+    // $($selectLatestLabel).after(nextHtmlInput);
 
+  })
+
+
+
+  $(".draggable").draggable({
+      // helper: "clone",
+      revert: "invalid"
+      // start: function(event, ui) {
+      //   c.tr = this;
+      //   c.helper = ui.helper;
+      // }
+    });
+
+  $(".droppable").droppable({
+    activeClass: "ui-state-default",
+    hoverClass: "ui-state-hover",
+    drop: function( event, ui) {
+      console.log("I've dropped");
+      var dropPlace = $(this).clone();
+      var table = $(this).parents();
+      $(table).append(dropPlace);
+      $(this).attr("class", "draggable");
+      // var item = ui.draggable.text();
+      // $(this).val(item);
+
+      // $(c.tr).remove();
+      // $(c.helper).remove();
+    }
   })
 
 
@@ -44,19 +74,35 @@ $(document).ready(function () {
     })
   })
 
-  $("#importItems").click(function(event) {
-    event.preventDefault();
-    // var name = $(this).attr("product")
-    // console.log($(this).attr());
-    // var payload = $(this).parents().serialize()
+  // $("#importItems").click(function(event) {
+  //   event.preventDefault();
+  //   // var name = $(this).attr("product")
+  //   // console.log($(this).attr());
+  //   // var payload = $(this).parents().serialize()
 
-    $.post({
-      url: '/product_check',
-      data: $(this).parents().serialize(),
-      success: function(produts) {
-        $("aboutModal").modal();
-      }
-    })
+  //   $.ajax({
+  //     type:'POST',
+  //     // url: '/product_check',
+  //     url: "/user/:user_id/list",
+  //     data: $(this).parents().serialize(),
+  //     success: function(products) {
+  //       console.log(products);
+  //       // if (products.length > 1) {
+  //       //   $("#aboutModal").html(product_form)
+  //       //   $.post({
+  //       //     url: '/product_form',
+  //       //     success: function(product_form) {
+
+  //       //     }
+  //         }
+  //         // $.get "product_form/{product_name}"
+  //         //  success: function(product_form) {
+  //         //  $("#aboutModal").html(product_form)
+
+  //       // $("#aboutModal").modal();
+  //       })
+  //     })
+})
     // var $form = $(this).parents("form");
     // $.ajax({
     //   url: '/product_check',
@@ -81,9 +127,9 @@ $(document).ready(function () {
       // }
     // })
 
-  })
+//   })
 
-})
+// })
 
 
 

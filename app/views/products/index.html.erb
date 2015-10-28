@@ -1,96 +1,136 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-6 col-md-4 col-md-offset-1">
+    <div class="col-md-5" id="background-table-fridge">
+      <div id="fridge_table">
       <h1>Fridge items</h1>
-      <table class="table">
-        <tr>
-          <th>Category</th>
-          <th>Item</th>
-          <th>Expiration Date</th>
-        </tr>
+        <div class="row">
+          <div class="col-xs-4 col-md-4">Category</div>
+          <div class="col-xs-4 col-md-4">Item</div>
+          <div class="col-xs-4 col-md-4">Expiration Date</div>
+        </div>
       <% @fridge.each do |item| %>
         <% cat = Category.find(item[0].category_id) %>
         <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
-        <tr>
-          <td>
-        <%= cat.category + subcat + ":" %>
-          </td>
-          <td>
-        <%= item[0].name + "," %>
-          </td>
-          <td>
-        <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-          </td>
-          <td>
-        <%= form_for @user_product, url: update_date_path, method: :patch do %>
-          <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
-        <% end %>
-          </td>
-        </tr>
+
+          <div class="row draggable" >
+
+            <div class="col-xs-4 col-md-4">
+              <%= cat.category + subcat + ":" %>
+            </div>
+            <div class="col-xs-4 col-md-4">
+              <%= item[0].name + "," %>
+            </div>
+            <div class="col-xs-4 col-md-4">
+              <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
+            </div>
+            <div class="col-xs-4 col-md-4">
+              <%= form_for @user_product, url: update_date_path, method: :patch do %>
+                <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
+              <% end %>
+            </div>
+
+          </div>
       <% end %>
-      </table>
+
+      <div class="row droppable">
+        <div class="col-xs-4 col-md-4">
+        </div>
+        <div class="col-xs-4 col-md-4">
+        </div>
+        <div class="col-xs-4 col-md-4">
+        </div>
+      </div>
     </div>
-    <div class="col-xs-6 col-md-4 col-md-offset-1">
+  </div>
+  <div class="col-md-5" id="background-table-pantry">
+    <div id="pantry_table">
 
       <h1>Pantry items</h1>
-      <table class="table">
-        <tr>
-          <th>Cateogry</th>
-          <th>Item</th>
-          <th>Expiration Date</th>
-        </tr>
+      <div class="row">
+        <div class="col-xs-4 col-md-4">Cateogry</div>
+        <div class="col-xs-4 col-md-4">Item</div>
+        <div class="col-xs-4 col-md-4">Expiration Date</div>
+      </div>
+
 
       <% @pantry.each do |item| %>
         <% cat = Category.find(item[0].category_id) %>
         <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
-        <tr>
-          <td>
-        <%= cat.category + " " + subcat + ":" %>
-          </td>
-          <td>
-        <%= item[0].name + "," %>
-          </td>
-        <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-          <td>
-        <%= form_for @user_product, url: update_date_path, method: :patch do %>
-          <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
-        <% end %>
-          </td>
-        </tr>
+
+          <div class="row draggable">
+            <div class="col-xs-4 col-md-4">
+              <%= cat.category + " " + subcat + ":" %>
+            </div>
+            <div class="col-xs-4 col-md-4">
+              <%= item[0].name + "," %>
+            </div>
+              <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
+            <div class="col-xs-4 col-md-4">
+              <%= form_for @user_product, url: update_date_path, method: :patch do %>
+                <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
+              <% end %>
+            </div>
+          </div>
+
 
       <% end %>
-    </table>
+
+        <div class="row droppable">
+          <div class="col-xs-4 col-md-4">
+          </div>
+          <div class="col-xs-4 col-md-4">
+          </div>
+          <div class="col-xs-4 col-md-4">
+          </div>
+        </div>
+
+
+      </div>
     </div>
   </div>
   <div class="row">
 
-    <div class="col-xs-6 col-md-4 col-md-offset-4">
+    <div class="col-md-11" id="background-table-freezer">
+      <div class="row">
       <h1>Freezer items</h1>
-      <table class="table">
-        <tr>
-          <th>Category</th>
-          <th>Item</th>
-          <th>Expiration Date</th>
-        </tr>
-      <% @freezer.each do |item| %>
-        <% cat = Category.find(item[0].category_id) %>
-        <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
-        <tr>
-          <td>
-        <%= cat.category + subcat + ":" %>
-          </td>
-          <td>
-        <%= item[0].name + "," %>
-          </td>
-          <td>
-        <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-          <%= form_for @user_product, url: update_date_path, method: :patch do %>
-            <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
+        <div class="background-table" id="freezer_table">
+          <div class="row">
+            <div class="col-xs-4 col-md-4">Category</div>
+            <div class="col-xs-4 col-md-4">Item</div>
+            <div class="col-xs-4 col-md-4">Expiration Date</div>
+          </div>
+          <% @freezer.each do |item| %>
+          <% cat = Category.find(item[0].category_id) %>
+          <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
+
+          <div class="row draggable">
+            <div class="col-xs-4 col-md-4">
+              <%= cat.category + subcat + ":" %>
+            </div>
+            <div class="col-xs-4 col-md-4">
+              <%= item[0].name + "," %>
+            </div>
+            <div class="col-xs-4 col-md-4">
+              <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
+              <%= form_for @user_product, url: update_date_path, method: :patch do %>
+                <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
+              <% end %>
+            </div>
+          </div>
+
           <% end %>
-          </td>
-        </tr>
-        <% end %>
-      </table>
+
+          <div class="row droppable">
+            <div class="col-xs-4 col-md-4">
+            </div>
+            <div class="col-xs-4 col-md-4">
+            </div>
+            <div class="col-xs-4 col-md-4">
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>

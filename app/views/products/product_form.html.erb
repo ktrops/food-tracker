@@ -1,0 +1,24 @@
+<!-- Modal -->
+ <div class="modal fade" id="aboutModal" role="dialog">
+   <div class="modal-dialog">
+
+     <!-- Modal content-->
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">x</button>
+         <h4 class="modal-title">Choose a Product</h4>
+       </div>
+       <div class="modal-body">
+       <%= form_for :product do |f| %>
+       <% num = 0%>
+         <% @products.each do |product|%>
+            <% num += 1 %>
+            <label class="labelItem" for="product_name<%=num%>"><%=product.name%></label>
+            <input type="radio" name="products[][name]" class="inputItem" id="product_name#{num}"> %>
+         <% end %>
+         <%= f.submit %>
+        <% end %>
+       </div>
+     </div>
+   </div>
+ </div>

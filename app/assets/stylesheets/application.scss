@@ -23,27 +23,72 @@ html body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 
-/*form {
-  background: none;
-}*/
+.userProductInput {
+  max-width: 100px;
+}
 
-.row {
-  margin: 0 -9999rem;
+#background-table-pantry {
+/*  margin: 0 -9999rem;
   margin-top: 20%;
-  /* add back negative margin value */
+   add back negative margin value
   padding: 0.25rem 9999rem;
-  padding-bottom: 4%;
-  height: 100%;
+  padding-bottom: 4%;*/
+  max-width: 100%;
+  height: 350px;
+  width: 500px;
   background: rgba(71, 181, 108, 0.5);
-  text-align: center;
+  margin-left: 2%;
+  margin-right: -2%;
+  padding: 1%;
+  /*overflow: hidden;*/
+
+  /*overflow-x: hidden;*/
+
+  /*text-align: center;*/
 }
 /*  background: #80E680;
   width: 100%;
   line-height: 100%;*/
   /*opacity: 0.4;*/
+
+#background-table-fridge {
+/*  margin: 0 -9999rem;
+  margin-top: 20%;
+   add back negative margin value
+  padding: 0.25rem 9999rem;
+  padding-bottom: 4%;*/
+  margin-left: 4.5%;
+  max-width: 100%;
+  height: 350px;
+  /*overflow-x: hidden;*/
+  padding: 1%;
+  /*overflow-x: hidden;*/
+  background: rgba(71, 181, 108, 0.5);
+  /*text-align: center;*/
+
+}
+
+#background-table-freezer {
+/*  margin: 0 -9999rem;
+  margin-top: 20%;
+   add back negative margin value
+  padding: 0.25rem 9999rem;
+  padding-bottom: 4%;*/
+  max-width: 100%;
+  text-align: center;
+  /*overflow-y: scroll;*/
+  /*overflow-x: hidden;*/
+  padding: 1%;
+  margin: 4%;
+  height: 350px;
+  background: rgba(71, 181, 108, 0.5);
+  /*text-align: center;*/
+
+}
+
 
 
 

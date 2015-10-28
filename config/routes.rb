@@ -32,8 +32,11 @@ Rails.application.routes.draw do
 
   post '/product_check' => 'products#product_check', as: :product_check
   get '/product_check' => 'products#product_check'
+  get '/product_form/:product' => 'products#product_form', as: :product_form
 
   post '/product_select' => 'products#product_select', as: :product_select
+
+  get 'user/:user_id/products/autocomplete_product_name' => 'products#autocomplete_product_name', as: :autocomplete
 
 
   resources :users

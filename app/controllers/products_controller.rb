@@ -1,8 +1,10 @@
 class ProductsController < ApplicationController
+  autocomplete :product, :name, :full => true
+
   def list
-    user = User.find(session[:user_id])
+    @user = User.find(session[:user_id])
     @product = Product.new
-    @user_product = user.products
+    @user_product = @user.products
     user = User.find(session[:user_id])
     @user_products = user.products
   end
@@ -10,8 +12,14 @@ class ProductsController < ApplicationController
   def product_check
     name = params[:products][0][:name]
     @product = Product.find_by_name_or_subname(name)
-    render :json => @product
+    render :product_form
 
+
+  end
+
+  def product_form
+    name = params[:product]
+    @product = Product.find_by_name_or_subname(name)
   end
 
   def product_select
