@@ -12,6 +12,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% unless session[:user_id].nil? %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <label class="labelItem" for="product_name0">Name</label>
+
+          <input type="text" data-autocomplete="<%=autocomplete_path%>" data-update-elements="{}" name="products[][name]" class="inputItem" id="product_name0">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    <%= link_to "Log Out", logout_path, class: "navbar-right btn btn-default", method: :delete %>
+    </div>
+  </nav>
+  <% end %>
 
 <%= yield %>
 
