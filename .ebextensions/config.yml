@@ -2,8 +2,9 @@ option_settings:
   - namespace: aws:elasticbeanstalk:container:nodejs:staticfiles
     option_name: /public
     value: /public
-  - option_name: NODE_ENV
+  - option_name: RACK_ENV
     value: production
 commands:
-  - scheduler: "cd /var/app/current && rake environment resque:scheduler"
-  - worker: "cd /var/app/current && QUEUE=date_queue rake environment resque:work"
+  - scheduler: "rake environment resque:scheduler"
+  - worker: QUEUE=date_queue rake environment resque:work"
+  - cwd: "/var/app/current"
