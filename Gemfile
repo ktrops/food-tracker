@@ -18,6 +18,9 @@ gem 'bootstrap-sass'
 
 gem 'rails4-autocomplete'
 
+gem 'resque', :require => "resque/server"
+gem 'resque-scheduler'
+
 
 gem 'httparty'
 # See https://github.com/rails/execjs#readme for more supported runtimes

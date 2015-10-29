@@ -13,6 +13,18 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  host = "www.trackthefood.com"
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mandrillapp.com",
+    :port => 587,
+    :domain => "mandrillapp.com",
+    :user_name => ENV['MANDRILL_USERNAME'],
+    :password => ENV['MANDRILL_PASSWORD'],
+    :enable_starttls_auto => true
+  }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.

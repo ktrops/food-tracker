@@ -28,6 +28,11 @@ class ProductsController < ApplicationController
     @product = Product.find_by_name_or_subname(name)
   end
 
+  def check_expiration_date
+
+    Resque.enqueue(CheckExpiration)
+  end
+
   def product_select
     @user_products = params[:products]
     binding.pry

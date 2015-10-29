@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get '/user' => 'users#index', as: :user
 
+  mount Resque::Server, :at => "/resque"
+
   # get 'users/new'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,10 +1,20 @@
 require 'httparty'
 
-products_uri = "http://localhost:3000/product/all"
-categories_uri = "http://localhost:3000/category/all"
-fridge_uri = "http://localhost:3000/fridge"
-freezer_uri = "http://localhost:3000/freezer"
-pantry_uri = "http://localhost:3000/pantry"
+if Rails.env.production? == true
+  products_uri = "http://foodtrackerapi.herokuapp.com/product/all"
+  categories_uri = "http://foodtrackerapi.herokuapp.com/category/all"
+  fridge_uri = "http://foodtrackerapi.herokuapp.com/fridge"
+  freezer_uri = "http://foodtrackerapi.herokuapp.com/freezer"
+  pantry_uri = "http://foodtrackerapi.herokuapp.com/pantry"
+else
+  products_uri = "http://localhost:3000/product/all"
+  categories_uri = "http://localhost:3000/category/all"
+  fridge_uri = "http://localhost:3000/fridge"
+  freezer_uri = "http://localhost:3000/freezer"
+  pantry_uri = "http://localhost:3000/pantry"
+end
+
+
 
 items = HTTParty.get(products_uri)
 categories = HTTParty.get(categories_uri)
