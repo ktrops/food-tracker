@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/user' => 'users#index', as: :user
 
-  # mount Resque::Server, :at => "/resque"
+  mount Resque::Server, :at => "/resque"
 
   # get 'users/new'
 
