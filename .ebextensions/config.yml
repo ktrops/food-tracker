@@ -6,4 +6,4 @@ option_settings:
     value: production
 commands:
   - scheduler: "rake environment resque:scheduler"
-  - worker: "QUEUE=date_queue rake rake environment resque:work"
+  - worker: "QUEUE=date_queue rake environment resque:work"
