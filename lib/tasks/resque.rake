@@ -7,7 +7,12 @@ namespace :resque do
   task :setup  => :environment do
     require 'resque'
 
-    Resque.redis = 'localhost:6379'
+    if Rails.env.production?
+      Resque.redis = 'food-tracker-001.mg1fnh.0001.usw2.cache.amazonaws.com:6379'
+    else
+      Resque.redis = 'localhost:6379'
+    end
+
   end
 
   task :setup_schedule => :setup do
