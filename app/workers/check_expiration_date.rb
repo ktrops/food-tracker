@@ -1,4 +1,4 @@
-require 'resque/tasks'
+
 # require ''
 
 class CheckExpirationDate
