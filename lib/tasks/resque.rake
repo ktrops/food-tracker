@@ -1,3 +1,4 @@
+require 'resque'
 require 'resque/tasks'
 require 'resque/scheduler/tasks'
 
@@ -5,7 +6,7 @@ require 'resque/scheduler/tasks'
 
 namespace :resque do
   task :setup  => :environment do
-    require 'resque'
+
 
     if Rails.env.production?
       Resque.redis = 'food-tracker-001.mg1fnh.0001.usw2.cache.amazonaws.com:6379'
