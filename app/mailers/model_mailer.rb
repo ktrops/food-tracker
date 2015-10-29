@@ -5,10 +5,11 @@ class ModelMailer < ApplicationMailer
   #
   #   en.model_mailer.expiration_notification.subject
   #
-  def expiration_notification(product)
+  def expiration_notification(product, user)
     @product = product
     @greeting = "Hi"
-    user = User.find(session[:user_id])
+
+    # user = User.find(session[:user_id])
 
     mail to: user.email, subject: "Your food is going to expire."
   end
