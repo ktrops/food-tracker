@@ -51,6 +51,7 @@ class ProductsController < ApplicationController
           # raise
           instance_with_updated_date = categorize_product(product_for_user, user.user_products.last)
           instance_with_updated_date.save
+          ModelMailer.expiration_notification(@product, user).deliver_now
         end
       else
         @product = Product.new(product_params)

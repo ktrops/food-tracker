@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/user' => 'users#index', as: :user
 
-  mount Resque::Server, :at => "/resque"
+  # mount Resque::Server, :at => "/resque"
 
   # get 'users/new'
 
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#new'
+  root 'sessions#new'
 
   get "/auth/google_oauth2/callback" => 'sessions#oauth', as: :google
 
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   post '/product_select' => 'products#product_select', as: :product_select
 
-  get 'user/:user_id/products/autocomplete_product_name' => 'products#autocomplete_product_name', as: :autocomplete
+  get 'products/autocomplete_product_name' => 'products#autocomplete_product_name', as: :autocomplete
 
   patch '/user/:user_id/user_product/change_location' => 'products#change_location', as: :change_location
 
