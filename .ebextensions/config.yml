@@ -4,3 +4,6 @@ option_settings:
     value: /public
   - option_name: NODE_ENV
     value: production
+commands:
+  - scheduler: "rake environment resque:scheduler"
+  - worker: "QUEUE=date_queue rake resque:work"

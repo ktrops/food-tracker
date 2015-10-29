@@ -1,10 +1,10 @@
 require 'resque/tasks'
 require 'resque/scheduler/tasks'
 
-task "resque:setup" => :environment
+
 
 namespace :resque do
-  task :setup do
+  task :setup  => :environment do
     require 'resque'
 
     Resque.redis = 'localhost:6379'
@@ -13,9 +13,9 @@ namespace :resque do
   task :setup_schedule => :setup do
     require 'resque-scheduler'
 
-    Resque.schedule = YAML.load_file('expiration_date_schedule.yml')
+    Resque.schedule = YAML.load_file('config/expiration_date_schedule.yml')
 
-    require 'jobs'
+   # require 'app/workers/check_expiration_date'
   end
 
   task :scheduler => :setup_schedule

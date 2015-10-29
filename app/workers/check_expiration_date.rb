@@ -1,11 +1,19 @@
+require 'resque/tasks'
+# require ''
+
 class CheckExpirationDate
   @queue = :date_queue
   def self.perform
-    UserProducts.each do |product|
-      if product.dop_expiration_date_min >= Date.tomorrow
-        ModelMailer.expiration_notification(product.name, product.user).deliver
+    UserProduct.all.each do |product|
+      unless product.dop_expiration_date_min.nil?
+        if product.dop_expiration_date_min >= Date.tomorrow && product.user.id == 1
+
+          ModelMailer.expiration_notification(product.name, product.user).deliver
+        end
       end
     end
 
   end
 end
+
+

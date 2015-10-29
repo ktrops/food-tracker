@@ -1,0 +1,6 @@
+queue_emails:
+  cron: "* * * * *"
+  class: "CheckExpirationDate"
+  args:
+  queue: date_queue
+  description: "This job will check if user_products are going to expire and then send users email reminders"
