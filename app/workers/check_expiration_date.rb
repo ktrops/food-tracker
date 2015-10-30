@@ -6,7 +6,7 @@ class CheckExpirationDate
   def self.perform
     UserProduct.all.each do |user_product|
       unless user_product.dop_expiration_date_min.nil?
-        if user_product.dop_expiration_date_min >= Date.tomorrow && user_product.user.id == 1
+        if user_product.dop_expiration_date_min <= Date.tomorrow && user_product.user.id == 1
 
           ModelMailer.expiration_notification(user_product.product.name, user_product.user).deliver
         end
