@@ -4,7 +4,10 @@ option_settings:
     value: /public
   - option_name: RACK_ENV
     value: production
-commands:
-  - scheduler: "BACKGROUND=yes rake environment resque:scheduler"
-  - worker: "BACKGROUND=yes QUEUE=date_queue rake environment resque:work"
-  - cwd: "/var/app/current"
+container_commands:
+  scheduler:
+    command: "BACKGROUND=yes rake environment resque:scheduler"
+    cwd: "/var/app/current"
+  worker:
+    command: "BACKGROUND=yes QUEUE=date_queue rake environment resque:work"
+    cwd: "/var/app/current"
