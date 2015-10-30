@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-5" id="background-table-fridge">
+    <div class="col-md-11" id="background-table-fridge">
       <div id="fridge_table">
       <h1>Fridge items</h1>
         <div class="row">
-          <div class="col-xs-4 col-md-4">Category</div>
-          <div class="col-xs-4 col-md-4">Item</div>
-          <div class="col-xs-4 col-md-4">Expiration Date</div>
+          <div class="col-xs-3 col-md-3">Category</div>
+          <div class="col-xs-3 col-md-3">Item</div>
+          <div class="col-xs-3 col-md-3">Expiration Date</div>
         </div>
       <% @fridge.each do |item| %>
         <% cat = Category.find(item[0].category_id) %>
@@ -14,42 +14,45 @@
 
           <div class="row draggable" >
 
-            <div class="col-xs-4 col-md-4 category">
+            <div class="col-xs-3 col-md-3 category">
               <%= cat.category + subcat + ":" %>
             </div>
-            <div class="col-xs-4 col-md-4 name">
+            <div class="col-xs-3 col-md-3 name">
               <%= item[0].name + "," %>
             </div>
 
               <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
 
-            <div class="col-xs-4 col-md-4 date">
+            <div class="col-xs-3 col-md-3 date">
               <%= form_for @user_product, url: update_date_path, method: :patch do %>
                 <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
               <% end %>
             </div>
+            <div class="col-xs-1 col-md-1 delete">
 
+             <%= link_to "X", product_delete_path(item[1].id), method: :delete, class: "btn btn-danger" %>
+           </div>
           </div>
       <% end %>
 
       <div class="row droppable">
-        <div class="col-xs-4 col-md-4">
+        <div class="col-xs-3 col-md-3">
         </div>
-        <div class="col-xs-4 col-md-4">
+        <div class="col-xs-3 col-md-3">
         </div>
-        <div class="col-xs-4 col-md-4">
+        <div class="col-xs-3 col-md-3">
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md-5" id="background-table-pantry">
+  <div class="col-md-11" id="background-table-pantry">
     <div id="pantry_table">
 
       <h1>Pantry items</h1>
       <div class="row">
-        <div class="col-xs-4 col-md-4">Cateogry</div>
-        <div class="col-xs-4 col-md-4">Item</div>
-        <div class="col-xs-4 col-md-4">Expiration Date</div>
+        <div class="col-xs-3 col-md-3">Cateogry</div>
+        <div class="col-xs-3 col-md-3">Item</div>
+        <div class="col-xs-3 col-md-3">Expiration Date</div>
       </div>
 
 
@@ -58,29 +61,32 @@
         <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
 
           <div class="row draggable">
-            <div class="col-xs-4 col-md-4 category">
+            <div class="col-xs-3 col-md-3 category">
               <%= cat.category + " " + subcat + ":" %>
             </div>
-            <div class="col-xs-4 col-md-4 name">
+            <div class="col-xs-3 col-md-3 name">
               <%= item[0].name + "," %>
             </div>
               <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-            <div class="col-xs-4 col-md-4 date">
+            <div class="col-xs-3 col-md-3 date">
               <%= form_for @user_product, url: update_date_path, method: :patch do %>
                 <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
               <% end %>
             </div>
+            <div class="col-xs-1 col-md-1 delete">
+              <%= link_to "X", product_delete_path(item[1].id), method: :delete, class: "btn btn-danger" %>
+           </div>
           </div>
 
 
       <% end %>
 
         <div class="row droppable">
-          <div class="col-xs-4 col-md-4">
+          <div class="col-xs-3 col-md-3">
           </div>
-          <div class="col-xs-4 col-md-4">
+          <div class="col-xs-3 col-md-3">
           </div>
-          <div class="col-xs-4 col-md-4">
+          <div class="col-xs-3 col-md-3">
           </div>
         </div>
 
@@ -104,28 +110,31 @@
           <% subcat = cat.subcategory.nil? ? "" : cat.subcategory%>
 
           <div class="row draggable">
-            <div class="col-xs-4 col-md-4 category">
+            <div class="col-xs-3 col-md-3 category">
               <%= cat.category + subcat + ":" %>
             </div>
-            <div class="col-xs-4 col-md-4 name">
+            <div class="col-xs-3 col-md-3 name">
               <%= item[0].name + "," %>
             </div>
               <% date = expiration_date_format(item[1].dop_expiration_date_min) %>
-            <div class="col-xs-4 col-md-4 date">
+            <div class="col-xs-3 col-md-3 date">
               <%= form_for @user_product, url: update_date_path, method: :patch do %>
                 <input class="userProductInput" id="<%=item[1].id%>" type="text" value="<%=date%>">
               <% end %>
+            </div>
+            <div class="col-xs-1 col-md-1 delete">
+              <%= link_to "X", product_delete_path(item[1].id), method: :delete, class: "btn btn-danger" %>
             </div>
           </div>
 
           <% end %>
 
           <div class="row droppable">
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-3 col-md-3">
             </div>
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-3 col-md-3">
             </div>
-            <div class="col-xs-4 col-md-4">
+            <div class="col-xs-3 col-md-3">
             </div>
           </div>
 

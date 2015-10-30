@@ -21,11 +21,18 @@ $(document).ready(function () {
 
   })
 
+  $('input[data-autocomplete]').bind('autocompletechange', function(event, data){
+  /* Do something here */
+  conole.log(data.item.id);
+});
+
 
 
   $(".draggable").draggable({
       // helper: "clone",
       revert: "invalid",
+      snap: $(".droppable").prev(),
+      snapMode: "outer",
       start: function() {
         var draggedThing = $(this);
       }
@@ -41,9 +48,6 @@ $(document).ready(function () {
     hoverClass: "ui-state-hover",
     drop: function( event, ui) {
       console.log("I've dropped");
-      console.log(event);
-      console.log($(this));
-      console.log(ui);
       var dropPlace = $(this).clone();
       var table = $(this).parents();
       $(table).append(dropPlace);
@@ -61,6 +65,7 @@ $(document).ready(function () {
         },
         complete: function() {
             console.log("Date updated");
+            window.location.reload();
         }
 
       })

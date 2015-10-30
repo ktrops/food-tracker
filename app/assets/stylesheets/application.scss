@@ -50,62 +50,38 @@ html body {
 }
 
 #background-table-pantry {
-/*  margin: 0 -9999rem;
-  margin-top: 20%;
-   add back negative margin value
-  padding: 0.25rem 9999rem;
-  padding-bottom: 4%;*/
-  max-width: 100%;
-  height: 350px;
-  width: 500px;
-  background: rgba(71, 181, 108, 0.5);
-  margin-left: 2%;
-  margin-right: -2%;
-  padding: 1%;
-  /*overflow: hidden;*/
-
-  /*overflow-x: hidden;*/
-
-  /*text-align: center;*/
-}
-/*  background: #80E680;
-  width: 100%;
-  line-height: 100%;*/
-  /*opacity: 0.4;*/
-
-#background-table-fridge {
-/*  margin: 0 -9999rem;
-  margin-top: 20%;
-   add back negative margin value
-  padding: 0.25rem 9999rem;
-  padding-bottom: 4%;*/
-  margin-left: 4.5%;
-  max-width: 100%;
-  height: 350px;
-  /*overflow-x: hidden;*/
-  padding: 1%;
-  /*overflow-x: hidden;*/
-  background: rgba(71, 181, 108, 0.5);
-  /*text-align: center;*/
-
-}
-
-#background-table-freezer {
-/*  margin: 0 -9999rem;
-  margin-top: 20%;
-   add back negative margin value
-  padding: 0.25rem 9999rem;
-  padding-bottom: 4%;*/
   max-width: 100%;
   text-align: center;
-  /*overflow-y: scroll;*/
-  /*overflow-x: hidden;*/
   padding: 1%;
   margin: 4%;
   height: 350px;
   background: rgba(71, 181, 108, 0.5);
-  /*text-align: center;*/
+}
 
+
+#background-table-fridge {
+  max-width: 100%;
+  text-align: center;
+  padding: 1%;
+  margin: 4%;
+  height: 350px;
+  background: rgba(71, 181, 108, 0.5);
+
+}
+
+#background-table-freezer {
+  max-width: 100%;
+  text-align: center;
+  padding: 1%;
+  margin: 4%;
+  height: 350px;
+  background: rgba(71, 181, 108, 0.5);
+
+
+}
+
+.droppable {
+  height: 20px;
 }
 
 

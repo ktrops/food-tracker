@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  autocomplete :product, :name, :full => true
+  @product = autocomplete :product, :name, :extra_data => [:id], :full => true
 
   def list
     @user = User.find(session[:user_id])
@@ -42,8 +42,11 @@ class ProductsController < ApplicationController
   def create
     user = User.find(session[:user_id])
     not_saved_products = []
-    params[:products].each do |product|
+    uniq_products = params[:products].uniq
+    # raise
+    uniq_products.each do |product|
       @product = Product.find_by_name_or_subname(product[:name])
+
       # if @product1.length > 1 put a popup here so users can choose if the search returns multipule products.
       if @product
         @product.each do |product_for_user|
@@ -51,7 +54,7 @@ class ProductsController < ApplicationController
           # raise
           instance_with_updated_date = categorize_product(product_for_user, user.user_products.last)
           instance_with_updated_date.save
-          ModelMailer.expiration_notification(@product, user).deliver_now
+
         end
       else
         @product = Product.new(product_params)
@@ -105,6 +108,15 @@ class ProductsController < ApplicationController
 
   end
 
+  def destroy
+    @user_product = UserProduct.find(params[:product_id])
+     # = UserProduct.where(product_id: params[:product_id], user_id: user)
+    if @user_product
+      @user_product.delete
+    end
+    redirect_to user_food_path(session[:user_id])
+  end
+
   def update
     @product = Product.find(params[:product][:id])
     @product.update(product_params)
@@ -116,7 +128,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:category_id, :category_name, :name,
+    params.require(:product).permit(:id, :category_id, :category_name, :name,
                                     :subname, :pantry_dop_min, :pantry_dop_max,
                                     :pantry_dop_metric, :pantry_tips, :fridge_dop_min,
                                     :fridge_dop_max, :fridge_dop_metric, :fridge_open_min,

@@ -5,9 +5,12 @@ class ApplicationController < ActionController::Base
   skip_before_filter :verify_authenticity_token unless Rails.env.prodution?
 
     def expiration_date_min(product, storage)
-    date = Time.now
+    date = Date.today
+
     if dynamic_dop_min(product, storage, "metric") == "Months"
       expiration_date =  date + dynamic_dop_min(product, storage, "dop").month
+    elsif dynamic_dop_min(product, storage, "metric") == "Weeks"
+      expiration_date = date + dynamic_dop_min(product, storage, "dop").week
     elsif dynamic_dop_min(product, storage, "metric") == "Years"
       expiration_date =  date + dynamic_dop_min(product, storage, "dop").year
     elsif dynamic_dop_min(product, storage, "metric") == "Days"
@@ -20,6 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def dynamic_dop_min(product, storage, type)
+
     if type == "dop"
       variable = storage + "_dop_min"
       product.send(variable.to_sym)

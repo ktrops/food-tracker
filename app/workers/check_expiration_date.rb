@@ -1,6 +1,3 @@
-
-# require ''
-
 class CheckExpirationDate
   @queue = :date_queue
 

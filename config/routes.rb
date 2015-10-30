@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get '/sign_up' => 'users#new', as: :sign_up
+  post '/sign_up' => 'users#create'
 
   get '/user' => 'users#index', as: :user
 
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   root 'sessions#new'
 
   get "/auth/google_oauth2/callback" => 'sessions#oauth', as: :google
+
 
   get '/auth/failure' => 'sessions#failure', as: :failure
 
@@ -38,9 +40,11 @@ Rails.application.routes.draw do
 
   post '/product_select' => 'products#product_select', as: :product_select
 
-  get 'products/autocomplete_product_name' => 'products#autocomplete_product_name', as: :autocomplete
+  get 'products/autocomplete_product_name_id' => 'products#autocomplete_product_name', as: :autocomplete
 
   patch '/user/:user_id/user_product/change_location' => 'products#change_location', as: :change_location
+
+  delete '/:product_id/delete' => 'products#destroy', as: :product_delete
 
 
   resources :users
