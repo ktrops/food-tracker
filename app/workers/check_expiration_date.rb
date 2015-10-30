@@ -3,6 +3,7 @@
 
 class CheckExpirationDate
   @queue = :date_queue
+
   def self.perform
     UserProduct.all.each do |user_product|
       unless user_product.dop_expiration_date_min.nil?
@@ -12,7 +13,7 @@ class CheckExpirationDate
         end
       end
     end
-
+  sleep 15
   end
 end
 
