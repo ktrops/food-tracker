@@ -1,5 +1,5 @@
 queue_emails:
-  cron: "* * * * *"
+  cron: "*/5 * * * *"
   class: "CheckExpirationDate"
   args:
   queue: date_queue
